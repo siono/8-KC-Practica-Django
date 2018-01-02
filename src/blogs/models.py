@@ -34,10 +34,11 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     summary = models.TextField(max_length=500)
     body = models.TextField()
-
     multimedia = models.URLField(blank=True, null=True)
-
     publication_date = models.DateTimeField()
+
+    created_at = models.DateTimeField(auto_now_add=True)  # saves the date when the object is created
+    modified_at = models.DateTimeField(auto_now_add=True)  # saves the date when the object is update
 
     category = models.ManyToManyField(Category)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
