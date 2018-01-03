@@ -108,3 +108,5 @@ venv.bak/
 # pycharm
 .idea
 
+# django
+db.sqlite3
