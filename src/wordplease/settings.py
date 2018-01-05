@@ -119,3 +119,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Define number of post to show in main page
+POSTS_TO_SHOW = 5

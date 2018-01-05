@@ -20,6 +20,7 @@ class Blog(models.Model):
     description = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+
     def __str__(self):
         """
         Devuelve la representación de un objeto como un string

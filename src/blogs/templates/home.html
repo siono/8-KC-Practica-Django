@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>IPDB: Internet Pelis Database</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
     <h1>Welcome to WorldPlease!</h1>
-    {% for post in posts %}
-        <img src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" height="300" >
-    {% endfor %}
-</body>
-</html>
+
+    {% include "post_list.html" %}
+
+{% endblock %}
+
