@@ -18,7 +18,8 @@ class Blog(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="blog",on_delete=models.CASCADE) #one user only have one blog
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
