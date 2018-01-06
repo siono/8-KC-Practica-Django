@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.db.models import Prefetch
 from django.shortcuts import render
 from django.views import View
 
@@ -14,23 +13,20 @@ class PostQuerySet(object):
         return Post.objects.filter(publication_date__lte=datetime.now()).order_by("-publication_date")
 
 
-
 class PostList(PostQuerySet,View):
 
     def get(self, request):
         latest_posts = super(PostList,self).get_public_post()[:POSTS_TO_SHOW]
-
         context = {'posts': latest_posts}
         return render(request, "home.html", context)
+
 
 class BlogList(View):
 
     def get(self, request):
         list_blogs = Blog.objects.all()
-
         context = { 'blogs': list_blogs}
         return render(request, "blog_list.html", context)
-
 
 
 class BlogDetail(PostQuerySet,View):
