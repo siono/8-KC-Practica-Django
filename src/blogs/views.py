@@ -35,7 +35,7 @@ class BlogList(View):
 
 class BlogDetail(PostQuerySet,View):
 
-    def get(self,request,slug):
-        posts_blog = super(BlogDetail,self).get_public_post().filter(blog__name = slug)
+    def get(self,request,user):
+        posts_blog = super(BlogDetail,self).get_public_post().filter(blog__user__username = user)
         context = { 'posts': posts_blog}
         return render(request,"blog_detail.html",context)

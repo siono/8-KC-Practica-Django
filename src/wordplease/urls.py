@@ -20,7 +20,7 @@ from blogs.views import PostList, BlogList, BlogDetail
 
 urlpatterns = [
     path('', PostList.as_view(), name="home_page"),
-    path('blogs/<slug:slug>', BlogDetail.as_view(), name="blog_detail"),
+    path('blogs/<str:user>', BlogDetail.as_view(), name="blog_detail"),
     path('blogs/', BlogList.as_view(), name="list_blog"),
 
     path('admin/', admin.site.urls),
