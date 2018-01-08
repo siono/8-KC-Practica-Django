@@ -17,8 +17,8 @@ class PostList(PostQuerySet,View):
 
     def get(self, request):
         latest_posts = super(PostList,self).get_public_post()[:POSTS_TO_SHOW]
-        context = {'posts': latest_posts}
-        return render(request, "home.html", context)
+        context = {'posts': latest_posts, 'title_page': 'Wellcome to WordPlease'}
+        return render(request, "post_list.html", context)
 
 
 class BlogList(View):
@@ -36,8 +36,8 @@ class BlogDetail(PostQuerySet,View):
         if len(posts_blog) == 0:
             return render(request, "404.html", status=404)
         else:
-            context = { 'posts': posts_blog, 'user': user}
-            return render(request,"blog_detail.html",context)
+            context = { 'posts': posts_blog, 'user': user, 'title_page': user + ' blog'}
+            return render(request,"post_list.html",context)
 
 class PostDetail(View):
 
