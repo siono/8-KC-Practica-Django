@@ -36,7 +36,7 @@ class BlogDetail(PostQuerySet,View):
         if len(posts_blog) == 0:
             return render(request, "404.html", status=404)
         else:
-            context = { 'posts': posts_blog}
+            context = { 'posts': posts_blog, 'user': user}
             return render(request,"blog_detail.html",context)
 
 class PostDetail(View):

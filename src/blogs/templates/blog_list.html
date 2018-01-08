@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    <h1>Blogs List</h1>
+    <h1 class="my-4">Blogs List</h1>
 
-    <ul>
+    <ul class="list-group col-md-12">
     {% for blog in blogs %}
 
-        <li><a href="{% url 'blog_detail' blog.user %}" title="{{ blog.name }}">{{ blog.name }}</li></a>
+        <li class="list-group-item no_border"><a href="{% url 'blog_detail' blog.user %}" title="{{ blog.name }}">{{ blog.name }}</li></a>
 
     {% endfor %}
     </ul>

@@ -1,0 +1,18 @@
+html, body, .container {
+    height: 100%;
+}
+
+.no_border{
+    border: none !important
+}
+
+.card-text{
+    margin: 25px auto;
+}
+
+footer{
+    position: fixed;
+    left:0px;
+    bottom:0px;
+    width:100%;
+}

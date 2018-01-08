@@ -1,3 +1,17 @@
 {% for post in posts %}
-        <img src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" height="300" width="400" >
+     <div class="card mb-4">
+
+        <img class="card-img-top" src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" height="300" width="400" >
+
+
+         <div class="card-body">
+             <h2 class="card-title">{{ post.title }}</h2>
+             <p class="card-text">{{ post.summary }}</p>
+             <a href="/blogs/{{ post.user }}/{{ post.pk }}" class="btn btn-primary">Read More &rarr;</a>
+         </div>
+
+         <div class="card-footer text-muted">
+             Publicado el {{ post.publication_date | date:"d/m/Y" }} by <a href="/blogs/{{ post.user }}">{{ post.user }}</a>
+         </div>
+     </div>
 {% endfor %}

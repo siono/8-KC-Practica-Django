@@ -3,16 +3,23 @@
 {% block head_title %} {{ post.title }} {% endblock %}
 {% block content %}
 
-    <h1>{{ post.title }}</h1>
-    <img src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" width="300">
-    <p>{{ post.body }}</p>
+
+    <h1 class="my-4">{{ post.title }}</h1>
+
+    <img class="card-img-top" src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" height="300" >
+    <p class="card-text">{{ post.body }}</p>
     <ul>
         <li>
-            <strong>Category:</strong>{{ post.category.name }}
+            <strong>Category:</strong>
+            {% for category in post.categories.all %}
+                {{ category.name }},
+            {% endfor %}
         </li>
         <li>
             <strong>Publication date:</strong>{{ post.publication_date | date:"d/m/Y" }}
         </li>
+
     </ul>
+
 
 {% endblock %}
