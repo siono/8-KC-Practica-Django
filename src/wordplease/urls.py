@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from blogs.views import PostList, BlogList, BlogDetail, PostDetail
+from users.views import LoginView, LogoutView
 
 urlpatterns = [
     path('', PostList.as_view(), name="home_page"),
+
+    path('login/', LoginView.as_view(), name="user_login"),
+    path('logout/', LogoutView.as_view(), name="user_logout"),
+
     path('blogs/<str:user>/<int:pk>/', PostDetail.as_view(), name="post_detail"),
     path('blogs/<str:user>', BlogDetail.as_view(), name="blog_detail"),
     path('blogs/', BlogList.as_view(), name="blog_list"),

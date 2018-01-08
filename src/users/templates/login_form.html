@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head_title %} Login {% endblock %}
+
+{% block content %}
+
+
+    <div class="wrapper col-sm-12">
+
+    <form class="form-signin" novalidate method="post">
+      <h2 class="form-signin-heading">Please login</h2>
+
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        {% csrf_token %}
+        {{ form.as_p }}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+    </div>
+
+
+
+{% endblock %}
+
+
