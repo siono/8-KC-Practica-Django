@@ -1,8 +1,10 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
+from blogs.form import PostForm
 from blogs.models import Post, Blog
 from wordplease.settings import POSTS_TO_SHOW
 
@@ -48,4 +50,12 @@ class PostDetail(View):
         else:
             context = {'post': post_detail[0]}
             return render(request, "post_detail.html", context)
+
+
+class CreatePost(LoginRequiredMixin,View):
+
+    def get(self, request):
+        form = PostForm()
+        return render(request, "post_form.html", {'form': form})
+
 
