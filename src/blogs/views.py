@@ -33,5 +33,19 @@ class BlogDetail(PostQuerySet,View):
 
     def get(self,request,user):
         posts_blog = super(BlogDetail,self).get_public_post().filter(blog__user__username = user)
-        context = { 'posts': posts_blog}
-        return render(request,"blog_detail.html",context)
+        if len(posts_blog) == 0:
+            return render(request, "404.html", status=404)
+        else:
+            context = { 'posts': posts_blog}
+            return render(request,"blog_detail.html",context)
+
+class PostDetail(View):
+
+    def get(self,request,user,pk):
+        post_detail = Post.objects.filter(blog__user__username = user).filter(pk=pk)
+        if len(post_detail) == 0:
+            return render(request, "404.html", status=404)
+        else:
+            context = {'post': post_detail[0]}
+            return render(request, "post_detail.html", context)
+
