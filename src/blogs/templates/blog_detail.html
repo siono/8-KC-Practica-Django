@@ -4,7 +4,7 @@
 
 
 
-        <h1 class="my-4">Posts de {{ user }} </h1>
+        <h1 class="my-4">{{ user | title }} posts</h1>
 
     <ul class="list-group col-md-12">
     {% for post in posts %}

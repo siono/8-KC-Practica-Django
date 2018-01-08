@@ -16,3 +16,16 @@ footer{
     bottom:0px;
     width:100%;
 }
+
+.clearfix {
+    display: inline-block;
+    width: 100%;
+}
+
+.mb-8{
+    margin-bottom: 8rem !important;
+}
+
+.mt-6{
+    margin-top: 6rem !important;
+}
