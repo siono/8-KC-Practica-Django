@@ -1,7 +1,9 @@
 from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import View
 
 from blogs.form import PostForm
@@ -57,5 +59,21 @@ class CreatePost(LoginRequiredMixin,View):
     def get(self, request):
         form = PostForm()
         return render(request, "post_form.html", {'form': form})
+
+    def post(self, request):
+        post = Post()
+        post.user = request.user
+        post.blog = request.user.blog
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save()
+            #vaciamos el formulario
+            form = PostForm()
+            url = reverse("post_detail", args=[post.user,post.pk]) #reverse genera url pasandole el tipo de URL
+            message = "Post created successfully!"
+            message += '<a href="{0}">View</a>'.format(url)
+            #enviamos mensaje de exito con un enlace a la pelicula que acabamos de cr
+            messages.success(request, message)
+        return render(request, "post_form.html", {'form':form})
 
 
