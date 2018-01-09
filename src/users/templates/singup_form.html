@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head_title %} Register {% endblock %}
+
+{% block content %}
+
+
+    <div class="wrapper col-sm-12">
+
+    <form class="form-register" novalidate method="post">
+      <h2 class="form-register-heading">Register</h2>
+
+        {% if messages %}
+        {% for message in messages %}
+            {% autoescape off %}
+            <div class="alert alert-{{ message.level_tag }}" role="alert">{{ message }}</div>
+            {% endautoescape %}
+        {% endfor %}
+        {% endif %}
+
+        {% csrf_token %}
+        {{ form.as_p }}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+    </div>
+
+
+
+{% endblock %}

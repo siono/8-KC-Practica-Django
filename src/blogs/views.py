@@ -38,7 +38,7 @@ class BlogDetail(PostQuerySet,View):
     def get(self,request,user):
         posts_blog = super(BlogDetail,self).get_public_post().filter(blog__user__username = user)
         if len(posts_blog) == 0:
-            return render(request, "404.html", status=404)
+            return render(request, "post_form.html", status=404)
         else:
             context = { 'posts': posts_blog, 'user': user, 'title_page': user + ' blog'}
             return render(request,"post_list.html",context)
@@ -70,8 +70,8 @@ class CreatePost(LoginRequiredMixin,View):
             #vaciamos el formulario
             form = PostForm()
             url = reverse("post_detail", args=[post.user,post.pk]) #reverse genera url pasandole el tipo de URL
-            message = "Post created successfully!"
-            message += '<a href="{0}">View</a>'.format(url)
+            message = "User and Blog created successfully!"
+            message += '<a href="{0}">Create your first post</a>'.format(url)
             #enviamos mensaje de exito con un enlace a la pelicula que acabamos de cr
             messages.success(request, message)
         return render(request, "post_form.html", {'form':form})

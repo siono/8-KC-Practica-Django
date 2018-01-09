@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from blogs.views import PostList, BlogList, BlogDetail, PostDetail, CreatePost
-from users.views import LoginView, LogoutView
+from users.views import LoginView, LogoutView,SingupView
 
 urlpatterns = [
     path('', PostList.as_view(), name="home_page"),
 
     path('login/', LoginView.as_view(), name="user_login"),
     path('logout/', LogoutView.as_view(), name="user_logout"),
+    path('signup/', SingupView.as_view(), name="user_singup"),
 
     path('new-post/', CreatePost.as_view(), name="create_post"),
 

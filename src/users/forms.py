@@ -14,16 +14,9 @@ class UserForm(forms.Form):
     first_name = forms.CharField(label='First name')
     last_name = forms.CharField(label='Last name')
     email = forms.EmailField(label='E-mail')
-    username = forms.CharField(
-        label='Username',
-        help_text='Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.',
-        validators=[RegexValidator(
-            r'[A-Za-z0-9@\.\+\-_]{1,30}',
-            'Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'
-        )]
-    )
+    username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
-    password_confirmation = forms.CharField(label='Confirm your password', widget=forms.PasswordInput())
+    password_confirmation = forms.CharField(label='Confirm your password')
     blog_name = forms.CharField(label='Blog name')
     blog_description = forms.CharField(label='Blog description')
 
@@ -36,3 +29,8 @@ class UserForm(forms.Form):
 
         if self.cleaned_data.get("password") != self.cleaned_data.get("password_confirmation"):
             raise ValidationError("Passwords don't match")
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
