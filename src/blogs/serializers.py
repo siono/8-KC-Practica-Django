@@ -26,4 +26,10 @@ class PostListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('title','summary','multimedia','publication_date')
+        fields = ('title','summary','body','multimedia','publication_date')
+
+class PostDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = '__all__'
