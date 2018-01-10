@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
@@ -20,8 +21,11 @@ class PostQuerySet(object):
 class PostList(PostQuerySet,View):
 
     def get(self, request):
-        latest_posts = super(PostList,self).get_public_post()[:POSTS_TO_SHOW]
-        context = {'posts': latest_posts, 'title_page': 'Wellcome to WordPlease'}
+        post_list = super(PostList,self).get_public_post()
+        paginator = Paginator(post_list, POSTS_TO_SHOW)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+        context = {'posts': posts, 'title_page': 'Wellcome to WordPlease'}
         return render(request, "post_list.html", context)
 
 
