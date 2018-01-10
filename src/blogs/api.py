@@ -1,9 +1,10 @@
 from datetime import datetime
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from blogs.models import Blog, Post
 from blogs.serializers import BlogsListSerializer, PostListSerializer
-from blogs.views import PostList
 
 
 class BlogsListAPI(ListAPIView):
@@ -16,9 +17,10 @@ class BlogsListAPI(ListAPIView):
     search_fields = ["name","user__username"]
     ordering_fields = ["name","user__username"]
 
-class PostListAPI(ListAPIView):
+class PostListAPI(ListCreateAPIView):
 
     queryset = Post.objects.select_related('blog__user').order_by('-publication_date')
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     serializer_class = PostListSerializer
     filter_backends = [SearchFilter, OrderingFilter]
@@ -26,11 +28,6 @@ class PostListAPI(ListAPIView):
     ordering_fields = ["title", "publication_date"]
 
     def get_queryset(self):
-        """
-        If user is not authenticated, returns only published posts
-        If user is authenticated and not superuser, returns all its posts and published posts from others
-        If user is superuser, returns all posts
-        """
 
         # si no está autenticado -> post publicados
         if not self.request.user.is_authenticated:
@@ -45,4 +42,5 @@ class PostListAPI(ListAPIView):
             return self.queryset.filter(blog=self.request.user.blog)
 
 
-
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user, blog=self.request.user.blog)

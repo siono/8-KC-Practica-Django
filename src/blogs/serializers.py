@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-
+from datetime import datetime
 from blogs.models import Blog, Post
 from rest_framework import serializers
 
@@ -21,6 +21,8 @@ class BlogsListSerializer(serializers.ModelSerializer):
 
 
 class PostListSerializer(serializers.ModelSerializer):
+
+    publication_date = serializers.DateTimeField(default=datetime.now())
 
     class Meta:
         model = Post
