@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -21,6 +22,12 @@ class Blog(models.Model):
     user = models.OneToOneField(User, related_name="blog",on_delete=models.CASCADE) #one user only have one blog
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def get_absolute_url(self):
+        """
+        Returns the Blog's absolute URL and shows a "Visit on site" button in admin's Blog detail.
+        :return: string with the Blog's absolute URL
+        """
+        return reverse('blog_detail', args=[self.user.username])
 
     def __str__(self):
         """
