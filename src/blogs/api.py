@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -6,8 +8,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from blogs.models import Blog, Post
 from blogs.permissions import PostPermission
 from blogs.serializers import BlogsListSerializer, PostListSerializer, PostDetailSerializer
-from users.permissions import UsersPermission
-
 
 class BlogsListAPI(ListAPIView):
     queryset = Blog.objects.all()
@@ -24,7 +24,8 @@ class PostListAPI(ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     serializer_class = PostListSerializer
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    filter_fields = ["categories"]
     search_fields = ["title", "summary"]
     ordering_fields = ["title", "publication_date"]
 
