@@ -5,12 +5,14 @@ from blogs.models import Post
 
 
 class PostForm(ModelForm):
+    error_css_class = "error"
 
     class Meta:
             model = Post
             fields = '__all__'
             exclude = ["user","blog"] #exclude el campo user y blog en el formulario
             widgets = {'publication_date': Input(attrs={'placeholder': 'AAAA-MM-DD HH:MM:SS'})}
+
 
 
     def __init__(self, *args, **kwargs):
