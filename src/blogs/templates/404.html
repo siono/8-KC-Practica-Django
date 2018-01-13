@@ -1,4 +1,23 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
 
 {% block head_title %} 404 not found {% endblock %}
-{% block content %} <h1>404 not found</h1>{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <div class="error-template center">
+            <h1>
+                Oops!</h1>
+            <h2>
+                404 Not Found</h2>
+            <div class="error-details">
+                {{ message }}
+            </div>
+            <div class="error-actions">
+                <a href="{% url "home_page" %}" class="btn btn-primary btn-lg"><span
+                        class="glyphicon glyphicon-home"></span>
+                    Home </a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

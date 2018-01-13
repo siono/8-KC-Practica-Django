@@ -7,7 +7,7 @@
     <ul class="list-group col-md-12">
     {% for blog in blogs %}
 
-        <li class="list-group-item no_border"><a href="{% url 'blog_detail' blog.user %}" title="{{ blog.name }}">{{ blog.name }}</li></a>
+        <li class="list-group-item no_border"><a href="{% url 'blog_detail' blog.user %}" title="{{ blog.name }}">{{ blog.name | title }}</li></a>
 
     {% endfor %}
     </ul>

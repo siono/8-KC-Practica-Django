@@ -46,3 +46,19 @@ footer p{
     margin: auto;
     width: auto;
 }
+
+/*404 template*/
+
+.error-template {
+    padding: 20% 15px;
+    text-align: center;
+}
+
+.error-actions .btn {
+    margin-right:20px;
+}
+
+.error-details {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}

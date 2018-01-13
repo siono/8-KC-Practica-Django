@@ -42,7 +42,8 @@ class BlogDetail(PostQuerySet,View):
     def get(self,request,user):
         posts_blog = super(BlogDetail,self).get_public_post().filter(blog__user__username = user)
         if len(posts_blog) == 0:
-            return render(request, "post_form.html", status=404)
+            context = {'message': "No existen post publicados"}
+            return render(request, "404.html",context, status=404)
         else:
             context = { 'posts': posts_blog, 'user': user, 'title_page': user + ' blog'}
             return render(request,"post_list.html",context)
@@ -52,7 +53,8 @@ class PostDetail(View):
     def get(self,request,user,pk):
         post_detail = Post.objects.filter(blog__user__username = user).filter(pk=pk)
         if len(post_detail) == 0:
-            return render(request, "404.html", status=404)
+            context = {'message': "Post no encontrado o eliminado"}
+            return render(request, "404.html", context, status=404)
         else:
             context = {'post': post_detail[0]}
             return render(request, "post_detail.html", context)
@@ -74,9 +76,9 @@ class CreatePost(LoginRequiredMixin,View):
             #vaciamos el formulario
             form = PostForm()
             url = reverse("post_detail", args=[post.user,post.pk]) #reverse genera url pasandole el tipo de URL
-            message = "Post created successfully!"
-            message += '<a href="{0}">View</a>'.format(url)
-            #enviamos mensaje de exito con un enlace a la pelicula que acabamos de crear
+            message = " created successfully!"
+            message += '<a href="{0}">Create your first post</a>'.format(url)
+            #enviamos mensaje de exito con un enlace a la pelicula que acabamos de cr
             messages.success(request, message)
         return render(request, "post_form.html", {'form':form})
 
