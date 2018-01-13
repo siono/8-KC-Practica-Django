@@ -13,6 +13,7 @@ class PostForm(ModelForm):
             exclude = ["user","blog"] #exclude el campo user y blog en el formulario
 
 
+
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
