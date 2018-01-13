@@ -53,7 +53,7 @@ class Post(models.Model):
     summary = models.TextField(max_length=500)
     body = models.TextField()
     multimedia = models.URLField(blank=True, null=True)
-    publication_date = models.DateTimeField()
+    publication_date = models.DateTimeField(help_text="Formato: 'AAAA-MM-DD HH:MM:SS'")
 
     created_at = models.DateTimeField(auto_now_add=True)  # saves the date when the object is created
     modified_at = models.DateTimeField(auto_now_add=True)  # saves the date when the object is update
