@@ -6,8 +6,13 @@ html, body, .container {
     border: none !important
 }
 
+.card{
+    width: 100%;
+}
+
 .card-text{
     margin: 25px auto;
+    width: 100%;
 }
 
 footer{

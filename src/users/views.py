@@ -54,13 +54,18 @@ class SingupView(View):
              user.last_name = form.cleaned_data.get('last_name')
              user.email = form.cleaned_data.get('email')
              user.username = form.cleaned_data.get('username')
-             user.set_password(form.cleaned_data.get('password'))
+             password = form.cleaned_data.get('password')
+             user.set_password(password)
              user.save()
 
              blog = Blog(user=user)
              blog.name = form.cleaned_data.get('blog_name')
              blog.description = form.cleaned_data.get('blog_description')
              blog.save()
+
+             # logeamos al usaurio
+             authenticate_user = authenticate(username=user.username, password=password)
+             django_login(request, authenticate_user)
 
              # vaciamos el formulario
              form = UserForm()

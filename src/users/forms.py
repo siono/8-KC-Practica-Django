@@ -16,7 +16,7 @@ class UserForm(forms.Form):
     email = forms.EmailField(label='E-mail')
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
-    password_confirmation = forms.CharField(label='Confirm your password')
+    password_confirmation = forms.CharField(label='Confirm your password',widget=forms.PasswordInput())
     blog_name = forms.CharField(label='Blog name')
     blog_description = forms.CharField(label='Blog description')
 

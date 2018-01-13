@@ -74,9 +74,9 @@ class CreatePost(LoginRequiredMixin,View):
             #vaciamos el formulario
             form = PostForm()
             url = reverse("post_detail", args=[post.user,post.pk]) #reverse genera url pasandole el tipo de URL
-            message = "User and Blog created successfully!"
-            message += '<a href="{0}">Create your first post</a>'.format(url)
-            #enviamos mensaje de exito con un enlace a la pelicula que acabamos de cr
+            message = "Post created successfully!"
+            message += '<a href="{0}">View</a>'.format(url)
+            #enviamos mensaje de exito con un enlace a la pelicula que acabamos de crear
             messages.success(request, message)
         return render(request, "post_form.html", {'form':form})
 
