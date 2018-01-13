@@ -14,10 +14,11 @@ class BlogsListSerializer(serializers.ModelSerializer):
 
     user = BlogOwnerSerializer(read_only=True)
     url = serializers.CharField(source='get_absolute_url', read_only=True)
+    posts_count = serializers.CharField(source='get_count_post')
 
     class Meta:
         model = Blog
-        fields = '__all__'
+        fields = ('id','user','url','name','description','posts_count')
 
 
 class PostListSerializer(serializers.ModelSerializer):

@@ -26,10 +26,17 @@ class Blog(models.Model):
 
     def get_absolute_url(self):
         """
-        Returns the Blog's absolute URL and shows a "Visit on site" button in admin's Blog detail.
-        :return: string with the Blog's absolute URL
+        Devuelve la url del blog
+
         """
         return reverse('blog_detail', args=[self.user.username])
+
+    def get_count_post(self):
+        """
+        Devuelve el número de post que tiene un blog
+
+        """
+        return self.post_set.count()
 
     def __str__(self):
         """
