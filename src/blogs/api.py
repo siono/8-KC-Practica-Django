@@ -10,17 +10,16 @@ from users.permissions import UsersPermission
 
 
 class BlogsListAPI(ListAPIView):
-
     queryset = Blog.objects.all()
     serializer_class = BlogsListSerializer
 
     # para habilitar la busqueda, ordenación
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ["name","user__username"]
-    ordering_fields = ["name","user__username"]
+    search_fields = ["name", "user__username"]
+    ordering_fields = ["name", "user__username"]
+
 
 class PostListAPI(ListCreateAPIView):
-
     queryset = Post.objects.select_related('blog__user').order_by('-publication_date')
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -43,16 +42,15 @@ class PostListAPI(ListCreateAPIView):
         else:
             return self.queryset.filter(blog=self.request.user.blog)
 
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, blog=self.request.user.blog)
 
-class PostDetailAPI(RetrieveUpdateDestroyAPIView):
 
+class PostDetailAPI(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.select_related('blog__user').order_by('-publication_date')
     serializer_class = PostDetailSerializer
     permission_classes = [PostPermission]
 
     # para que un usuario no pueda actualizar o borrar peliculas de otro usuario
     def perform_create(self, serializer):
-            serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user)

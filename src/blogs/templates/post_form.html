@@ -4,23 +4,23 @@
 
 {% block content %}
 
-     <div class="wrapper col-sm-12">
-    <h2 class="form-signin-heading">Create post</h2>
+    <div class="wrapper col-sm-12">
+        <h2 class="form-signin-heading">Create post</h2>
 
-    {% if messages %}
-        {% for message in messages %}
-            {% autoescape off %}
-            <div class="alert alert-success">{{ message }}</div>
-            {% endautoescape %}
-        {% endfor %}
-    {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                {% autoescape off %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endautoescape %}
+            {% endfor %}
+        {% endif %}
 
-    <form method="post" novalidate>
+        <form method="post" novalidate>
 
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create post</button>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create post</button>
 
-    </form>
-     </div>
+        </form>
+    </div>
 {% endblock %}

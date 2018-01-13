@@ -2,18 +2,15 @@
 
 {% block content %}
 
-
-
-        <h1 class="my-4">{{ user | title }} posts</h1>
+    <h1 class="my-4">{{ user | title }} posts</h1>
 
     <ul class="list-group col-md-12">
-    {% for post in posts %}
+        {% for post in posts %}
 
-        <li class="list-group-item no_border"><a href="/blogs/{{ post.user }}/{{ post.pk }}" title="{{ post.title }}">{{ post.title }}</li></a>
+            <li class="list-group-item no_border"><a href="/blogs/{{ post.user }}/{{ post.pk }}" title="{{ post.title }}">{{ post.title }}</li></a>
 
-    {% endfor %}
+        {% endfor %}
     </ul>
-
 
 
 {% endblock %}

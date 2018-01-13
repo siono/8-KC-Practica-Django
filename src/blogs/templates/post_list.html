@@ -2,39 +2,43 @@
 
 {% block content %}
 
-<h1 class="my-4">{{ title_page | title }}</h1>
+    <h1 class="my-4">{{ title_page | title }}</h1>
 
-{% for post in posts %}
-     <div class="card mb-4">
+    {% for post in posts %}
+        <div class="card mb-4">
 
-        <img class="card-img-top" src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}" height="300" width="400" >
-
-
-         <div class="card-body">
-             <h2 class="card-title">{{ post.title }}</h2>
-             <p class="card-text">{{ post.summary }}</p>
-             <a href="/blogs/{{ post.user }}/{{ post.pk }}" class="btn btn-primary">Read More &rarr;</a>
-         </div>
-
-         <div class="card-footer text-muted">
-             Publicado el {{ post.publication_date | date:"d/m/Y" }} by <a href="/blogs/{{ post.user }}">{{ post.user }}</a>
-         </div>
-     </div>
-{% endfor %}
+            <img class="card-img-top" src="{{ post.multimedia }}" alt="{{ post.title }}" title="{{ post.title }}"
+                 height="300" width="400">
 
 
-<div class="center">
-    <ul class="pagination">
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text">{{ post.summary }}</p>
+                <a href="/blogs/{{ post.user }}/{{ post.pk }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
 
-        {% for  x in posts.paginator.page_range %}
+            <div class="card-footer text-muted">
+                Publicado el {{ post.publication_date | date:"d/m/Y" }} by <a
+                    href="/blogs/{{ post.user }}">{{ post.user }}</a>
+            </div>
+        </div>
+    {% endfor %}
 
-            <li class="page-item {% if posts.number == x %} active {% endif %}"><a class="page-link" href="?page={{ x }}">{{ x }}</a></li>
 
-        {% endfor %}
+    <div class="center">
+        <ul class="pagination">
 
-    </ul>
+            {% for  x in posts.paginator.page_range %}
 
-</div>
+                <li class="page-item {% if posts.number == x %} active {% endif %}"><a class="page-link"
+                                                                                       href="?page={{ x }}">{{ x }}</a>
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
 
 
 {% endblock %}
