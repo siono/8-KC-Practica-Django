@@ -63,3 +63,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_author(self):
+        """
+        Devuelve el nombre y apellidos del autor del blog
+
+        """
+        return self.user.first_name +" "+ self.user.last_name
+

@@ -24,13 +24,18 @@ class BlogsListSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
 
     publication_date = serializers.DateTimeField(default=datetime.now())
+    author = serializers.CharField(source='get_author')
 
     class Meta:
         model = Post
-        fields = ('title','summary','body','multimedia','publication_date')
+        fields = ('title','summary','body','multimedia','author','publication_date')
 
 class PostDetailSerializer(serializers.ModelSerializer):
 
+    author = serializers.CharField(source='get_author')
+    blog = serializers.StringRelatedField(many=False)
+    categories = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('title','summary','body','multimedia','author','publication_date','created_at','modified_at','blog','categories')
